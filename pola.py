@@ -32,7 +32,7 @@ st.set_page_config(
     }
 )
 st.write("""
-<center><h2 style = "text-align: justify;">Aplikasi Analisis Sentimen Wisata Bukit Jaddih Menggunakan Metode Naive Bayes melalui Ulasan Google Maps</h2></center>
+<center><h2 style = "text-align: justify;">Aplikasi Analisis Sentimen Wisata Api Tak Kunjung Padam Menggunakan Metode Naive Bayes melalui Ulasan Google Maps</h2></center>
 """,unsafe_allow_html=True)
 
 with st.container():
@@ -64,7 +64,7 @@ with st.container():
 
     elif selected == "Dataset":
         st.write("#### Deskripsi Dataset")
-        st.write(""" <p style = "text-align: justify;">dataset tentang ulasan masyarakat terhadap pariwisata bukit Jaddih dari ulasan google maps. Selanjutnya data ulasan tersebut akan diklasifikasikan ke dalam dua kategori sentimen yaitu negatif dan positif kemudian dilakukan penerapan algoritma Multinomial Naive Bayes untuk mengetahui nilai akurasinya.</p>""",unsafe_allow_html=True)
+        st.write(""" <p style = "text-align: justify;">dataset tentang ulasan masyarakat terhadap pariwisata api tak kunjung padam dari ulasan google maps. Selanjutnya data ulasan tersebut akan diklasifikasikan ke dalam dua kategori sentimen yaitu negatif dan positif kemudian dilakukan penerapan algoritma Multinomial Naive Bayes untuk mengetahui nilai akurasinya.</p>""",unsafe_allow_html=True)
         st.write("#### Preprocessing Dataset")
         st.write(""" <p style = "text-align: justify;">Preprocessing data merupakan proses dalam mengganti teks tidak teratur supaya teratur yang nantinya dapat membantu pada proses pengolahan data.</p>""",unsafe_allow_html=True)
         st.write(""" 
@@ -78,7 +78,7 @@ with st.container():
         </ol> 
         """,unsafe_allow_html=True)
         st.write("#### Dataset")
-        df = pd.read_csv("ulasan_bj_pn.csv")
+        df = pd.read_csv("ulasan_atkp_pn.csv")
         df = df.drop(columns=['nama','sentiment','score'])
         st.write(df)
     elif selected == "Implementation":
@@ -150,7 +150,7 @@ with st.container():
             training_label, test_label = train_test_split(sentimen, test_size=0.2, random_state=1)#Nilai Y training dan Nilai Y testing    
 
             # model
-            with open('modelml.pkl', 'rb') as file:
+            with open('modelpola.pkl', 'rb') as file:
                 loaded_model = pickle.load(file)
             clf = loaded_model.fit(training,training_label)
             y_pred=clf.predict(test)
@@ -185,5 +185,5 @@ with st.container():
         st.write("##### Mata Kuliah = Pembelajaran Mesin - B") 
         st.write('##### Kelompok 8')
         st.write("1. Hambali Fitrianto (200411100074)")
-        st.write("2. Muhammad Hanif Santoso (200411100078)")
+        st.write("2. Choirinnisa' Fitria (200411100149)")
         
