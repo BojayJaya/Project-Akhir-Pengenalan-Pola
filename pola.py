@@ -175,7 +175,7 @@ with st.container():
 
     elif selected == "Tentang Kami":
         st.write("##### Mata Kuliah = Pengenalan Pola - B") 
-        st.write('##### Kelompok 8')
+        st.write('##### Kelompok :')
         st.write("1. Hambali Fitrianto (200411100074)")
         st.write("2. Choirinnisa' Fitria (200411100149)")
         
