@@ -70,8 +70,8 @@ with st.container():
         </ol> 
         """,unsafe_allow_html=True)
         st.write("#### Dataset")
-        df = pd.read_csv("ulasan_atkp_pn.csv")
-        df = df.drop(columns=['nama','sentiment','score'])
+        df = pd.read_csv("dataprep.csv")
+#         df = df.drop(columns=['nama','sentiment','score'])
         st.write(df)
     elif selected == "Implementation":
         #Getting input from user
