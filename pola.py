@@ -206,7 +206,7 @@ with st.container():
 
             # Classification Report
             classification_rep = classification_report(y_test, y_pred)
-            st.subheader('Classification Report:\n')
+            st.subheader('Classification Report:\t')
             st.code(classification_rep)
 
             # Confusion Matrix
