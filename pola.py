@@ -14,7 +14,7 @@ from nltk.tokenize import RegexpTokenizer
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
-# import pickle5 as pickle 
+import pickle5 as pickle 
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import warnings
 import seaborn as sns
@@ -145,19 +145,19 @@ with st.container():
             X_train, X_test, y_train, y_test = train_test_split(tfidf_wm, sentimen, test_size=0.1, random_state=1)
 
             # model
-            # with open('modelpola.pkl', 'rb') as file:
-            #     loaded_model = pickle.load(file)
-            # clf = loaded_model.fit(training,training_label)
-            # y_pred=clf.predict(test)
+            with open('modelpola.pkl', 'rb') as file:
+                loaded_model = pickle.load(file)
+            clf = loaded_model.fit(X_train,y_test)
+            y_pred=clf.predict(X_test)
 
-            # Membuat instance objek dari kelas MultinomialNB
-            clf = MultinomialNB()
+            # # Membuat instance objek dari kelas MultinomialNB
+            # clf = MultinomialNB()
 
-            # Melatih model menggunakan data pelatihan
-            clf.fit(X_train, y_train)
+            # # Melatih model menggunakan data pelatihan
+            # clf.fit(X_train, y_train)
 
-            # Membuat prediksi menggunakan data testing
-            y_pred = clf.predict(X_test)
+            # # Membuat prediksi menggunakan data testing
+            # y_pred = clf.predict(X_test)
 
             #Evaluasi
             # Menghitung akurasi
