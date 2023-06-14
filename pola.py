@@ -142,7 +142,7 @@ with st.container():
             
             #Train test split
             # Memisahkan data menjadi training set dan test set
-            X_train, X_test, y_train, y_test = train_test_split(tfidf_wm, sentimen, test_size=0.2, random_state=1)
+            X_train, X_test, y_train, y_test = train_test_split(tfidf_wm, sentimen, test_size=0.1, random_state=1)
 
             # model
             with open('modelpola.pkl', 'rb') as file:
