@@ -1,6 +1,6 @@
 from streamlit_option_menu import option_menu
 import streamlit as st
-import pandas as pd 
+import pandas as pd
 import numpy as np
 import regex as re
 import json
@@ -14,8 +14,7 @@ from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFacto
 from nltk.tokenize import RegexpTokenizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-# from sklearn.naive_bayes import MultinomialNB
-import pickle5 as pickle 
+import pickle5 as pickle
 from sklearn.metrics import confusion_matrix, accuracy_score
 import warnings
 warnings.filterwarnings('ignore')
@@ -139,8 +138,9 @@ with st.container():
             
             #Train test split
             training, test = train_test_split(tfidf_wm,test_size=0.2, random_state=1)#Nilai X training dan Nilai X testing
-            training_label, test_label = train_test_split(sentimen, test_size=0.2, random_state=1)#Nilai Y training dan Nilai Y testing    
-
+            training_label, test_label = train_test_split(sentimen, test_size=0.2, random_state=1)#Nilai Y training dan Nilai Y testing 
+            # Memisahkan data menjadi training set dan test set
+            # X_train, X_test, y_train, y_test = train_test_split(tfidf_wm, sentimen, test_size=0.1, random_state=1)
             # model
             with open('modelpola.pkl', 'rb') as file:
                 loaded_model = pickle.load(file)
@@ -183,9 +183,13 @@ with st.container():
             else:
                 st.error('Negative')
 
+            # Confusion Matrix
+            st.subheader('Confusion Matrix')
+            cm = confusion_matrix(test_label, y_pred)
+            st.write(cm)
+
     elif selected == "Tentang Kami":
         st.write("##### Mata Kuliah = Pengenalan Pola - B") 
         st.write('##### Kelompok :')
         st.write("1. Hambali Fitrianto (200411100074)")
         st.write("2. Choirinnisa' Fitria (200411100149)")
-        
