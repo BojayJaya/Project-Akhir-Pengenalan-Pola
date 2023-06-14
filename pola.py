@@ -219,6 +219,8 @@ with st.container():
             # fig, ax = plt.subplots()
             # sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["Negative", "Positive"], yticklabels=["Negative", "Positive"], ax=ax)
             # st.pyplot(fig)
+            # Mengatur konfigurasi untuk menghilangkan PyplotGlobalUseWarning
+            st.set_option('deprecation.showPyplotGlobalUse', False)
 
             # Menghitung confusion matrix
             cm = confusion_matrix(y_test, y_pred)
