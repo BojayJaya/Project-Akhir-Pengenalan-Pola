@@ -147,7 +147,7 @@ with st.container():
             # model
             with open('modelpola.pkl', 'rb') as file:
                 loaded_model = pickle.load(file)
-            clf = loaded_model.fit(X_train,y_test)
+            clf = loaded_model.fit(X_train,y_train)
             y_pred=clf.predict(X_test)
 
             # # Membuat instance objek dari kelas MultinomialNB
