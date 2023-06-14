@@ -176,19 +176,26 @@ with st.container():
             st.write(pd.DataFrame([slang],columns=["Slang Word Removing"]))
             st.write(pd.DataFrame([gabung],columns=["Stop Word Removing"]))
             st.write(pd.DataFrame([stem],columns=["Steaming"]))
-#             st.write('Case Folding')
-#             st.write(lower_case_isi)
-#             st.write('Cleaning Simbol')
-#             st.write(clean_symbols)
-#             st.write('Slang Word Removing')
-#             st.write(slang)
-#             st.write('Stop Word Removing')
-#             st.write(gabung)
-#             st.write('Steaming')
-#             st.write(stem)
+            # st.write('Case Folding')
+            # st.write(lower_case_isi)
+            # st.write('Cleaning Simbol')
+            # st.write(clean_symbols)
+            # st.write('Slang Word Removing')
+            # st.write(slang)
+            # st.write('Stop Word Removing')
+            # st.write(gabung)
+            # st.write('Steaming')
+            # st.write(stem)
 
+            # st.subheader('Akurasi')
+            # st.info(akurasi)
+            # Mengubah akurasi menjadi persen dengan 2 desimal
+            akurasi_persen = akurasi * 100
+
+            # Menampilkan akurasi
             st.subheader('Akurasi')
-            st.info(akurasi)
+            st.info(f"{akurasi_persen:.2f}%")
+
             
 
             st.subheader('Prediksi')
