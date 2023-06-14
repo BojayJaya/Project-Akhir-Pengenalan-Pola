@@ -209,18 +209,9 @@ with st.container():
             st.write(pd.DataFrame(cm, columns=["Negative (Actual)", "Positive (Actual)"], index=["Negative (Predicted)", "Positive (Predicted)"]))
 
             # Confusion Matrix Heatmap
-            # st.subheader('Confusion Matrix Heatmap')
-            # sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["Negative", "Positive"], yticklabels=["Negative", "Positive"])
-            # st.pyplot()
-            # Menghitung confusion matrix
-            cm = confusion_matrix(y_test, y_pred)
-
-            # Menampilkan confusion matrix dengan plot
-            sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
-            plt.title('Confusion Matrix')
-            plt.xlabel('Predicted')
-            plt.ylabel('Actual')
-            plt.show()
+            st.subheader('Confusion Matrix Heatmap')
+            sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["Negative", "Positive"], yticklabels=["Negative", "Positive"])
+            st.pyplot()
 
     elif selected == "Tentang Kami":
         st.write("##### Mata Kuliah = Pengenalan Pola - B") 
