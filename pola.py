@@ -1,6 +1,6 @@
 from streamlit_option_menu import option_menu
 import streamlit as st
-import pandas as pd
+import pandas as pd 
 import numpy as np
 import regex as re
 import json
@@ -14,9 +14,11 @@ from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFacto
 from nltk.tokenize import RegexpTokenizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-import pickle5 as pickle
-from sklearn.metrics import confusion_matrix, accuracy_score
+import pickle5 as pickle 
+from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 import warnings
+import seaborn as sns
+
 warnings.filterwarnings('ignore')
 
 st.set_page_config(
@@ -176,6 +178,7 @@ with st.container():
 
             st.subheader('Akurasi')
             st.info(akurasi)
+            
 
             st.subheader('Prediksi')
             if y_preds == "positive":
@@ -183,13 +186,24 @@ with st.container():
             else:
                 st.error('Negative')
 
+            # Classification Report
+            classification_rep = classification_report(test_label, y_pred)
+            st.subheader('Classification Report')
+            st.code(classification_rep)
+
             # Confusion Matrix
-            st.subheader('Confusion Matrix')
             cm = confusion_matrix(test_label, y_pred)
-            st.write(cm)
+            st.subheader('Confusion Matrix')
+            st.write(pd.DataFrame(cm, columns=["Negative (Actual)", "Positive (Actual)"], index=["Negative (Predicted)", "Positive (Predicted)"]))
+
+            # Confusion Matrix Heatmap
+            st.subheader('Confusion Matrix Heatmap')
+            sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["Negative", "Positive"], yticklabels=["Negative", "Positive"])
+            st.pyplot()
 
     elif selected == "Tentang Kami":
         st.write("##### Mata Kuliah = Pengenalan Pola - B") 
         st.write('##### Kelompok :')
         st.write("1. Hambali Fitrianto (200411100074)")
         st.write("2. Choirinnisa' Fitria (200411100149)")
+        
