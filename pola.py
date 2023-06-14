@@ -6,7 +6,7 @@ import json
 import nltk
 nltk.download('stopwords')
 nltk.download('punkt')
-from nltk.tokenize import sent_tokenize, word_tokenize
+# from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
@@ -14,7 +14,7 @@ from nltk.tokenize import RegexpTokenizer
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
-import pickle5 as pickle 
+# import pickle5 as pickle 
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import warnings
 import seaborn as sns
@@ -145,19 +145,19 @@ with st.container():
             X_train, X_test, y_train, y_test = train_test_split(tfidf_wm, sentimen, test_size=0.1, random_state=1)
 
             # model
-            with open('modelpola.pkl', 'rb') as file:
-                loaded_model = pickle.load(file)
-            clf = loaded_model.fit(X_train,y_train)
-            y_pred=clf.predict(X_test)
+            # with open('modelpola.pkl', 'rb') as file:
+            #     loaded_model = pickle.load(file)
+            # clf = loaded_model.fit(X_train,y_train)
+            # y_pred=clf.predict(X_test)
 
-            # # Membuat instance objek dari kelas MultinomialNB
-            # clf = MultinomialNB()
+            # Membuat instance objek dari kelas MultinomialNB
+            clf = MultinomialNB()
 
-            # # Melatih model menggunakan data pelatihan
-            # clf.fit(X_train, y_train)
+            # Melatih model menggunakan data pelatihan
+            clf.fit(X_train, y_train)
 
-            # # Membuat prediksi menggunakan data testing
-            # y_pred = clf.predict(X_test)
+            # Membuat prediksi menggunakan data testing
+            y_pred = clf.predict(X_test)
 
             #Evaluasi
             # Menghitung akurasi
@@ -206,8 +206,7 @@ with st.container():
 
             # Classification Report
             classification_rep = classification_report(y_test, y_pred)
-            st.subheader('Classification Report')
-            st.write('')
+            st.subheader('Classification Report:\n')
             st.code(classification_rep)
 
             # Confusion Matrix
@@ -220,8 +219,6 @@ with st.container():
             # fig, ax = plt.subplots()
             # sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["Negative", "Positive"], yticklabels=["Negative", "Positive"], ax=ax)
             # st.pyplot(fig)
-            # Mengatur konfigurasi untuk menghilangkan PyplotGlobalUseWarning
-            st.set_option('deprecation.showPyplotGlobalUse', False)
 
             # Menghitung confusion matrix
             cm = confusion_matrix(y_test, y_pred)
@@ -240,4 +237,3 @@ with st.container():
         st.write('##### Kelompok :')
         st.write("1. Hambali Fitrianto (200411100074)")
         st.write("2. Choirinnisa' Fitria (200411100149)")
-        
