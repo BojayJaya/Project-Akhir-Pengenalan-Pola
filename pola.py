@@ -209,11 +209,6 @@ with st.container():
             st.subheader('Classification Report:\n')
             st.code(classification_rep)
 
-            # Confusion Matrix
-            cm = confusion_matrix(y_test, y_pred)
-            st.subheader('Confusion Matrix')
-            st.write(pd.DataFrame(cm, columns=["Negative (Actual)", "Positive (Actual)"], index=["Negative (Predicted)", "Positive (Predicted)"]))
-
             # # Confusion Matrix Heatmap
             # st.subheader('Confusion Matrix Heatmap')
             # fig, ax = plt.subplots()
