@@ -19,7 +19,6 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 import warnings
 import seaborn as sns
 import matplotlib.pyplot as plt
-import seaborn as sns
 # from pickle import dump
 
 warnings.filterwarnings('ignore')
@@ -210,8 +209,9 @@ with st.container():
 
             # Confusion Matrix Heatmap
             st.subheader('Confusion Matrix Heatmap')
-            sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["Negative", "Positive"], yticklabels=["Negative", "Positive"])
-            st.pyplot()
+            fig, ax = plt.subplots()
+            sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["Negative", "Positive"], yticklabels=["Negative", "Positive"], ax=ax)
+            st.pyplot(fig)
 
     elif selected == "Tentang Kami":
         st.write("##### Mata Kuliah = Pengenalan Pola - B") 
