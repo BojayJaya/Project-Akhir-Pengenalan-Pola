@@ -1,7 +1,6 @@
 from streamlit_option_menu import option_menu
 import streamlit as st
-import pandas as pd 
-import numpy as np
+import pandas as pd
 import regex as re
 import json
 import nltk
@@ -12,12 +11,16 @@ from nltk.corpus import stopwords
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from nltk.tokenize import RegexpTokenizer
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-import pickle5 as pickle 
-from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+# import pickle5 as pickle 
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import warnings
 import seaborn as sns
+import matplotlib.pyplot as plt
+import seaborn as sns
+# from pickle import dump
 
 warnings.filterwarnings('ignore')
 
@@ -139,18 +142,27 @@ with st.container():
             df_tfidfvect = pd.DataFrame(data = tfidf_wm.toarray(),columns = tfidf_tokens)
             
             #Train test split
-            training, test = train_test_split(tfidf_wm,test_size=0.2, random_state=1)#Nilai X training dan Nilai X testing
-            training_label, test_label = train_test_split(sentimen, test_size=0.2, random_state=1)#Nilai Y training dan Nilai Y testing 
             # Memisahkan data menjadi training set dan test set
-            # X_train, X_test, y_train, y_test = train_test_split(tfidf_wm, sentimen, test_size=0.1, random_state=1)
+            X_train, X_test, y_train, y_test = train_test_split(tfidf_wm, sentimen, test_size=0.1, random_state=1)
+
             # model
-            with open('modelpola.pkl', 'rb') as file:
-                loaded_model = pickle.load(file)
-            clf = loaded_model.fit(training,training_label)
-            y_pred=clf.predict(test)
+            # with open('modelpola.pkl', 'rb') as file:
+            #     loaded_model = pickle.load(file)
+            # clf = loaded_model.fit(training,training_label)
+            # y_pred=clf.predict(test)
+
+            # Membuat instance objek dari kelas MultinomialNB
+            clf = MultinomialNB()
+
+            # Melatih model menggunakan data pelatihan
+            clf.fit(X_train, y_train)
+
+            # Membuat prediksi menggunakan data testing
+            y_pred = clf.predict(X_test)
 
             #Evaluasi
-            akurasi = accuracy_score(test_label, y_pred)
+            # Menghitung akurasi
+            akurasi = accuracy_score(y_test, y_pred)
 
             # Inputan 
             lower_case_isi,clean_symbols,slang,gabung,stem = prep_input_data(word, slang_dict)
@@ -187,19 +199,28 @@ with st.container():
                 st.error('Negative')
 
             # Classification Report
-            classification_rep = classification_report(test_label, y_pred)
+            classification_rep = classification_report(y_test, y_pred)
             st.subheader('Classification Report')
             st.code(classification_rep)
 
             # Confusion Matrix
-            cm = confusion_matrix(test_label, y_pred)
+            cm = confusion_matrix(y_test, y_pred)
             st.subheader('Confusion Matrix')
             st.write(pd.DataFrame(cm, columns=["Negative (Actual)", "Positive (Actual)"], index=["Negative (Predicted)", "Positive (Predicted)"]))
 
             # Confusion Matrix Heatmap
-            st.subheader('Confusion Matrix Heatmap')
-            sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["Negative", "Positive"], yticklabels=["Negative", "Positive"])
-            st.pyplot()
+            # st.subheader('Confusion Matrix Heatmap')
+            # sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["Negative", "Positive"], yticklabels=["Negative", "Positive"])
+            # st.pyplot()
+            # Menghitung confusion matrix
+            cm = confusion_matrix(y_test, y_pred)
+
+            # Menampilkan confusion matrix dengan plot
+            sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+            plt.title('Confusion Matrix')
+            plt.xlabel('Predicted')
+            plt.ylabel('Actual')
+            plt.show()
 
     elif selected == "Tentang Kami":
         st.write("##### Mata Kuliah = Pengenalan Pola - B") 
