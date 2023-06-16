@@ -35,7 +35,7 @@ st.set_page_config(
     }
 )
 st.write("""
-<center><h2 style = "text-align: justify;">APLIKASI ANALISIS SENTIMEN WISATA API TAK KUNJUNG PADAM MENGGUNAKAN METODE NAIVE BAYES MELALUI ULASAN GOOGLE REVIEW PADA GOOGLE MAPS</h2></center>
+<center><h2 style = "text-align: justify;">ANALISIS SENTIMEN WISATA API TAK KUNJUNG PADAM MENGGUNAKAN METODE NAIVE BAYES MELALUI ULASAN GOOGLE REVIEW PADA GOOGLE MAPS</h2></center>
 """,unsafe_allow_html=True)
 st.write("### Dosen Pengampu: Dr. Cucun Very Angkoso, S.T., MT.",unsafe_allow_html=True)
 
